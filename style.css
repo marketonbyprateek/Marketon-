@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Marketon by Prateek - main stylesheet
+   Marketon by Prateek - main stylesheet (white theme)
    Sections: 1 Tokens, 2 Base, 3 Layout, 4 Header, 5 Buttons, 6 Hero,
              7 Focus list, 8 Projects, 9 Text pages, 10 Contact, 11 Footer
    Edit the colours and fonts in section 1 to restyle the whole site.
@@ -7,23 +7,28 @@
 
 /* 1. Tokens ---------------------------------------------------------------- */
 :root {
-  --bg: #0b1426;          /* page background (dark navy) */
-  --bg-deep: #070d1a;     /* deeper navy for alternate sections */
-  --bg-raised: #111d36;   /* panels and cards */
-  --line: #22345a;        /* borders and dividers */
-  --text: #f4f6fb;        /* main text (near white) */
-  --muted: #a8b3ca;       /* secondary text */
-  --blue: #5b8def;        /* accent: buttons, rules */
-  --blue-soft: #8db0ff;   /* accent: links and small text on navy */
+  --bg: #ffffff;           /* page background (pure white) */
+  --bg-soft: #f5f7fa;      /* light grey section backgrounds */
+  --line: #e3e8ef;         /* subtle borders and dividers */
+  --line-strong: #ccd5e1;  /* slightly stronger borders (ghost buttons) */
+  --text: #1c2638;         /* main text (dark charcoal navy) */
+  --heading: #0f1b33;      /* headings (deep navy) */
+  --muted: #5a6678;        /* secondary text */
+  --blue: #2b64d9;         /* accent: buttons, rules */
+  --blue-dark: #1d4fb8;    /* accent: links, hover states */
+  --blue-tint: #eaf1ff;    /* very light blue for badges */
+
+  --shadow-s: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.06);
+  --shadow-m: 0 4px 14px rgba(16, 24, 40, 0.07), 0 2px 4px rgba(16, 24, 40, 0.04);
 
   --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  --radius-s: 6px;
-  --radius-m: 12px;
+  --radius-s: 8px;
+  --radius-m: 14px;
   --wrap: 68rem;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* 2. Base ------------------------------------------------------------------ */
@@ -44,7 +49,8 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.65;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 img,
@@ -57,6 +63,7 @@ h1,
 h2,
 h3 {
   margin: 0 0 0.75rem;
+  color: var(--heading);
   line-height: 1.15;
   font-weight: 700;
 }
@@ -87,16 +94,16 @@ p {
 }
 
 a {
-  color: var(--blue-soft);
+  color: var(--blue-dark);
   text-underline-offset: 0.2em;
 }
 
 a:hover {
-  color: var(--text);
+  color: var(--blue);
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue-soft);
+  outline: 3px solid var(--blue);
   outline-offset: 3px;
   border-radius: 2px;
 }
@@ -107,14 +114,15 @@ a:hover {
   top: -4rem;
   z-index: 10;
   padding: 0.6rem 1rem;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--heading);
+  color: #ffffff;
   font-weight: 600;
   border-radius: var(--radius-s);
 }
 
 .skip-link:focus {
   top: 1rem;
+  color: #ffffff;
 }
 
 /* 3. Layout ---------------------------------------------------------------- */
@@ -131,8 +139,7 @@ a:hover {
 
 .section-deep {
   padding-block: clamp(3rem, 8vw, 5.5rem);
-  background: var(--bg-deep);
-  border-block: 1px solid var(--line);
+  background: var(--bg-soft);
 }
 
 .section-intro {
@@ -145,6 +152,7 @@ a:hover {
 .site-header {
   background: var(--bg);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.04);
 }
 
 .site-header-inner {
@@ -160,8 +168,12 @@ a:hover {
   font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--heading);
   text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--heading);
 }
 
 .brand span {
@@ -185,16 +197,19 @@ a:hover {
   display: block;
   padding: 0.7rem 0.8rem;
   color: var(--muted);
+  font-weight: 500;
   text-decoration: none;
   border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .site-nav a:hover {
-  color: var(--text);
+  color: var(--heading);
+  border-bottom-color: var(--line-strong);
 }
 
 .site-nav a[aria-current="page"] {
-  color: var(--text);
+  color: var(--heading);
   border-bottom-color: var(--blue);
 }
 
@@ -208,32 +223,38 @@ a:hover {
 
 .btn {
   display: inline-block;
-  padding: 0.8rem 1.4rem;
+  padding: 0.8rem 1.5rem;
   border: 1px solid var(--blue);
   border-radius: var(--radius-s);
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-primary {
   background: var(--blue);
-  color: var(--bg);
+  color: #ffffff;
+  box-shadow: var(--shadow-s);
 }
 
 .btn-primary:hover {
-  background: var(--blue-soft);
-  color: var(--bg);
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  color: #ffffff;
+  box-shadow: var(--shadow-m);
 }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--text);
+  background: var(--bg);
+  border-color: var(--line-strong);
+  color: var(--heading);
 }
 
 .btn-ghost:hover {
-  background: var(--bg-raised);
-  color: var(--text);
+  background: var(--blue-tint);
+  border-color: var(--blue);
+  color: var(--blue-dark);
 }
 
 /* 6. Hero ------------------------------------------------------------------ */
@@ -251,7 +272,7 @@ a:hover {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 3vw, 1.75rem);
   line-height: 1.3;
-  color: var(--blue-soft);
+  color: var(--blue-dark);
   margin-bottom: 1.25rem;
 }
 
@@ -262,9 +283,10 @@ a:hover {
 .intent-figure {
   margin: 0;
   padding: 1.5rem;
-  background: var(--bg-raised);
+  background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
+  box-shadow: var(--shadow-m);
 }
 
 .search-bar {
@@ -272,7 +294,7 @@ a:hover {
   align-items: center;
   gap: 0.75rem;
   padding: 0.7rem 1.1rem;
-  background: var(--bg);
+  background: var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--text);
@@ -280,7 +302,7 @@ a:hover {
 
 .search-bar svg {
   flex: none;
-  color: var(--blue-soft);
+  color: var(--blue);
 }
 
 .intent-list {
@@ -294,7 +316,7 @@ a:hover {
 
 .intent-list dt {
   font-weight: 600;
-  color: var(--blue-soft);
+  color: var(--blue-dark);
 }
 
 .intent-list dd {
@@ -341,9 +363,16 @@ a:hover {
 
 .project {
   padding: clamp(1.5rem, 4vw, 2.25rem);
-  background: var(--bg-raised);
+  background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.project:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-m);
 }
 
 .project p {
@@ -354,17 +383,25 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: transparent;
+  background: var(--bg-soft);
   border-style: dashed;
+  box-shadow: none;
 }
 
+.project-empty:hover {
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.project .badge,
 .badge {
   display: inline-block;
   margin-bottom: 1rem;
-  padding: 0.15rem 0.75rem;
-  border: 1px solid var(--blue);
+  padding: 0.15rem 0.8rem;
+  background: var(--blue-tint);
+  border: 1px solid #cddcfb;
   border-radius: 999px;
-  color: var(--blue-soft);
+  color: var(--blue-dark);
   font-size: 0.875rem;
   font-weight: 600;
 }
@@ -376,9 +413,10 @@ a:hover {
   letter-spacing: -0.01em;
 }
 
+.project .project-note,
 .project-note {
   padding: 0.75rem 1rem;
-  background: var(--bg);
+  background: var(--bg-soft);
   border-left: 3px solid var(--blue);
   border-radius: var(--radius-s);
   color: var(--text);
@@ -388,7 +426,7 @@ a:hover {
   margin: 1.5rem 0 0.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--heading);
 }
 
 .project-list {
@@ -412,7 +450,7 @@ a:hover {
 
 .tag-list li {
   padding: 0.15rem 0.7rem;
-  background: var(--bg);
+  background: var(--bg-soft);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
   color: var(--muted);
@@ -479,18 +517,20 @@ a:hover {
   justify-content: space-between;
   gap: 0.25rem 1rem;
   padding: 1rem 1.25rem;
-  background: var(--bg-raised);
+  background: var(--bg);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
+  box-shadow: var(--shadow-s);
 }
 
 .contact-label {
   font-weight: 600;
+  color: var(--heading);
 }
 
 .placeholder-note {
   padding: 0.75rem 1rem;
-  background: var(--bg-raised);
+  background: var(--bg-soft);
   border-left: 3px solid var(--blue);
   border-radius: var(--radius-s);
   color: var(--muted);
@@ -500,6 +540,7 @@ a:hover {
 /* 11. Footer --------------------------------------------------------------- */
 .site-footer {
   padding-block: 2rem;
+  background: var(--bg);
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.95rem;
@@ -535,7 +576,9 @@ a:hover {
     scroll-behavior: auto;
   }
 
-  .btn {
+  .btn,
+  .project,
+  .site-nav a {
     transition: none;
   }
 }
